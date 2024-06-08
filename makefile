@@ -1,3 +1,6 @@
+default:
+	@cat makefile
+
 # Define the default target
 all: result.csv
 
