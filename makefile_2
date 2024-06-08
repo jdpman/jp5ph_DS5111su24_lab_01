@@ -48,12 +48,12 @@ raven_counts:
 # Rule to count the total number of lines in all downloaded files
 total_lines:
 	@echo "Counting total lines in all downloaded files..."
-	wc -l pg*.txt | tail -n 1
+	wc -l *.txt | tail -n 1
 
 # Rule to count the total number of words in all downloaded files
 total_words:
 	@echo "Counting total words in all downloaded files..."
-	wc -w pg*.txt | tail -n 1
+	wc -w *.txt | tail -n 1
 
 # Rule to clean up the generated files
 clean:
