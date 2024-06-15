@@ -10,6 +10,10 @@ def clean_text(text):
     Returns:
         str: The cleaned text.
     """
+    
+    logger.info("cleaning text input...")
+    assert isinstance(text, str), "Input should be a string"
+
     text = text.lower()
     text = text.translate(str.maketrans('', '', string.punctuation))
     return text
@@ -24,6 +28,10 @@ def tokenize(text):
     Returns:
         list: A list of words.
     """
+
+    logger.info("tokenizing text input...")
+    assert isinstance(text, str), "Input should be a string"
+
     cleaned_text = clean_text(text)
     words = cleaned_text.split()
     return words
@@ -38,6 +46,10 @@ def count_words(text):
     Returns:
         dict: A dictionary with words as keys and their counts as values.
     """
+
+    logger.info("Counting words...")
+    assert isinstance(text, str), "Input should be a string"
+
     words = tokenize(text)
     word_counts = {}
     for word in words:
