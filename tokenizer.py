@@ -1,4 +1,10 @@
 import string
+import re
+import logging
+
+#Configure the logger
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def clean_text(text):
     """
