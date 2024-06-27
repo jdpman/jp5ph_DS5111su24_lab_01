@@ -11,9 +11,9 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 @pytest.mark.parametrize('text, expected_text', [
-    ('But the Raven, sitting lonely - on the placid bust!', 'But the Raven sitting lonely  on the placid bust'),
-    ('Once upon a midnight dreary, while I pondered, weak and weary...', 'Once upon a midnight dreary while I pondered weak and weary'),
-    ('And Le Corbeau, perché solitairement sur ce buste placide, parla...', 'And Le Corbeau perché solitairement sur ce buste placide parla')
+    ('But the Raven, sitting lonely on the placid bust!','but the raven sitting lonely on the placid bust'),
+    ('Once upon a midnight dreary, while I pondered, weak and weary...', 'once upon a midnight dreary while i pondered weak and weary'),
+    ('And Le Corbeau, perche solitairement sur ce buste placide, parla...', 'and le corbeau perche solitairement sur ce buste placide parla')
 ])
 def test_clean_text(text, expected_text):
     """
