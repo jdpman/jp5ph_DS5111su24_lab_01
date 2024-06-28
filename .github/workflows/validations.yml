@@ -5,6 +5,11 @@ name: Python package
 on:
   push:
   workflow_dispatch:
+    inputs:
+      run_non_integration_tests:
+        description: "Run non-integration tests"
+        required: true
+        default: 'true'
 
 jobs:
   build:
@@ -12,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7"]
+        python-version: ["3.7","3.8","3.9"]
 
     steps:
       - uses: actions/checkout@v4
@@ -20,11 +25,30 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Verify python version
+        run: |
+          python --version
+          if [[ "$(python --version 2>&1)" != "Python ${{ matrix.python-version}}.*"]];
+            echo "Wrong Python version detected"
+            exit 1
+          fi
       - name: Install dependencies
         run: |
           make env
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Test with pytest
-        run: |
-          pytest -vvx tests/
+      
+      - name: create logs directory
+        run: mkdir -p ./logs
 
+      - name: Run non-integration tests
+        if: github.event.inputs.run_non_integratoin_tests == 'true'
+        run: |
+          pytest -vvx tests/ --deselect tests/test_integration.py::test_fail_integration --log-file:./logs/pytest.log
+      - name: Run integration tests
+        run: |
+          make test-integration
+      - name: Display logs on failure
+        if: failure()
+        run: |
+          echo "one or more steps failed. Displaying logs for debugging:"
+          cat ./logs/pytest.log
