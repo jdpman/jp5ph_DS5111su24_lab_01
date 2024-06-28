@@ -70,13 +70,17 @@ clean:
 # List of text files to process
 TEXT_FILES = pg1063.txt pg1064.txt pg2151.txt pg10031.txt pg10947.txt pg15143.txt pg17192.txt pg25525.txt pg32037.txt pg51060.txt
 
+# Create logs directory if it does not exist
+prepare-logs-dir:
+	@mkdir -p logs
+
 # Target to run non-integration tests
-test:
-	pytest -m "not integration"
+test: prepare-logs-dir
+	pytest -m "not integration" --log-file=./logs/pytest.log
 
 # Target to run integration tests
-test-integration:
-	pytest -m "integration"
+test-integration: prepare-logs-dir
+	pytest -m "integration" --log-file=./logs/pytest.log
 
 # Phony targets
 .PHONY: install test test test-integration est all clean raven_line_count raven_word_count raven_counts total_lines total_words setup process_files
