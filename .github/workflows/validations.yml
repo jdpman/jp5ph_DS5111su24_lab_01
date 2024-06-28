@@ -28,7 +28,7 @@ jobs:
       - name: Verify python version
         run: |
           python --version
-          if [[ "$(python --version 2>&1)" != "Python ${{ matrix.python-version}}.*"]];
+          if [[ "$(python --version 2>&1)" != "Python ${{ matrix.python-version}}.*"]]; then
             echo "Wrong Python version detected"
             exit 1
           fi
