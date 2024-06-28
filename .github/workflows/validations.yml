@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8]
+        python-version: [3.7,3.8]
 
     steps:
       - uses: actions/checkout@v4
@@ -32,6 +32,12 @@ jobs:
             echo "Wrong Python version detected"
             exit 1
           fi
+      
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pkg-config libsystem-dev libsystem-journal-dev
+
       - name: Install dependencies
         run: |
           make env
