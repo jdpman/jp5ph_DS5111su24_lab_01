@@ -39,7 +39,7 @@ jobs:
           sudo apt-get install -y pkg-config libsystemd-dev
 
       - name: Install dependencies
-        run: |
+        run: |i
           make env
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       
