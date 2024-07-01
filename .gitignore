@@ -1,4 +1,0 @@
-*.txt
-*.txt.count
-**/*__pycache__
-**/*venv
