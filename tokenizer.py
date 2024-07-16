@@ -1,5 +1,9 @@
+"""
+Module for tokenizing text.
+"""
+
+
 import string
-import re
 import logging
 
 #Configure the logger
@@ -16,7 +20,6 @@ def clean_text(text):
     Returns:
         str: The cleaned text.
     """
-    
     logger.info("cleaning text input...")
     assert isinstance(text, str), "Input should be a string"
 
