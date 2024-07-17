@@ -27,7 +27,7 @@ jobs:
     - name: Lint with pylint
       run: |
         . env/bin/activate
-        pylint src/pkg_/tokenizer.py
+        pylint tokenizer.py
 
     - name: Test with pytest
       run: |
