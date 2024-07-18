@@ -3,7 +3,6 @@
 name: Python package
 
 on:
-  push:
   workflow_dispatch:
     inputs:
       run_non_integration_tests:
@@ -57,4 +56,6 @@ jobs:
         if: failure()
         run: |
           echo "one or more steps failed. Displaying logs for debugging:"
-          cat ./logs/pytest.log
+          cat pylint==3.2.3
+pytest==8.2.2
+requests==2.32.3./logs/pytest.log

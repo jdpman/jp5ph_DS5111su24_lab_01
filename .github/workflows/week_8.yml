@@ -46,7 +46,6 @@ jobs:
       - name: run non-integration tests
         if: github.event.inputs.run_non_integration_tests == 'true'
         run: |
-          . env/bin/activate
           make test
 
       - name: run integration tests
