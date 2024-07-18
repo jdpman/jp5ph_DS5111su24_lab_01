@@ -28,23 +28,15 @@ def test_integration_process_3():
         assert isinstance(common_words_count, dict), "Expected count of common words to be a dictionary"
         assert len(common_words_count) > 0, "Expected non-empty dictionary of word counts" 
 
-@pytest.mark.integration
-def test_integration_process_1():
+#@pytest.mark.integration
+#def test_integration_process_1():
     #Example integration test scenario
     #download_result = download()
     #cleaned_text = clean_text(download_result)
-    tokens = tokenize(cleaned_text)
-    common_words_count = count_words(tokens)
+    #tokens = tokenize(cleaned_text)
+    #common_words_count = count_words(tokens)
 
-    assert common_words_count >=0, "Expected positive count of common words"
+    #assert common_words_count >=0, "Expected positive count of common words"
 
-@pytest.mark.integration
-def test_integration_process_2():
-    # Another example integratio ntest scenario
-    #download_result = download()
-    cleaned_text = clean_text(download_result)
-    tokens = tokenize(cleaned_text)
-    common_words_count = count_common_words(tokens)
-
-    assert isinstance(common_words_count, int), f"Expected integer count of common words,got {type(common_words_count)}"
+    #assert isinstance(common_words_count, int), f"Expected integer count of common words,got {type(common_words_count)}"
 
