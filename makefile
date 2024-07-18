@@ -78,7 +78,7 @@ prepare-logs-dir:
 	@mkdir -p logs
 
 # Target to run non-integration tests
-test: prepare-logs-dir
+test-non-integration: prepare-logs-dir
 	pytest -m "not integration" --log-file=./logs/pytest.log
 
 # Target to run integration tests
