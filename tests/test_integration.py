@@ -9,7 +9,7 @@ def test_integration_process_3():
     text_numbers = [1063, 1064, 2151, 10031, 10947, 15143, 17192, 25525, 32037, 51060]
 
     # Download raw data
-    raw_text = download(text_numbers)
+    raw_texts = download(text_numbers)
     assert isinstance(raw_texts, list), "Expected list of downloaded texts"
     assert all(isinstance(text, str) for text in raw_texts), "Expected each downloaded text to be a string"
     
