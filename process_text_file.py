@@ -1,3 +1,8 @@
+"""
+process text
+
+"""
+
 import sys
 from tokenizer import count_words
 

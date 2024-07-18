@@ -1,0 +1,8 @@
+#!/root/lab_1/jp5ph_DS5111su24_lab_01/env/bin/python
+# -*- coding: utf-8 -*-
+import re
+import sys
+from IPython import start_ipython
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(start_ipython())

@@ -1,11 +1,12 @@
 # Licensed under the LGPL: https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html
-# For details: https://github.com/pylint-dev/astroid/blob/main/LICENSE
-# Copyright (c) https://github.com/pylint-dev/astroid/blob/main/CONTRIBUTORS.txt
+# For details: https://github.com/PyCQA/astroid/blob/main/LICENSE
+# Copyright (c) https://github.com/PyCQA/astroid/blob/main/CONTRIBUTORS.txt
 
 """This module contains utility functions for scoped nodes."""
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from typing import TYPE_CHECKING
 
 from astroid.manager import AstroidManager
@@ -14,7 +15,7 @@ if TYPE_CHECKING:
     from astroid import nodes
 
 
-def builtin_lookup(name: str) -> tuple[nodes.Module, list[nodes.NodeNG]]:
+def builtin_lookup(name: str) -> tuple[nodes.Module, Sequence[nodes.NodeNG]]:
     """Lookup a name in the builtin module.
 
     Return the list of matching statements and the ast for the builtin module
@@ -29,7 +30,7 @@ def builtin_lookup(name: str) -> tuple[nodes.Module, list[nodes.NodeNG]]:
     if name == "__dict__":
         return _builtin_astroid, ()
     try:
-        stmts: list[nodes.NodeNG] = _builtin_astroid.locals[name]  # type: ignore[assignment]
+        stmts: Sequence[nodes.NodeNG] = _builtin_astroid.locals[name]  # type: ignore[assignment]
     except KeyError:
-        stmts = []
+        stmts = ()
     return _builtin_astroid, stmts
