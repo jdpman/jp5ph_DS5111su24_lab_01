@@ -46,6 +46,7 @@ jobs:
       - name: run non-integration tests
         #if: github.event.inputs.run_non_integration_tests == 'true'
         run: |
+          make update
           make test
 
       - name: run integration tests
