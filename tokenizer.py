@@ -10,7 +10,7 @@ import requests
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def download(url = text_numbers):
+def download(text_numbers):
 
     """
 
@@ -31,7 +31,7 @@ def download(url = text_numbers):
     for number in text_numbers:
         url = base_url.format(number, number)
         logger.info("downloading from URL: %s", url)
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
         response.raise_for_status() # Ensure we notice bad responses
         raw_texts.append(response.text)
 
