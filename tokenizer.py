@@ -2,13 +2,40 @@
 Module for tokenizing text.
 """
 
-
 import string
 import logging
+import requests
 
-#Configure the logger
+# Configure the logger
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+def download(url = text_numbers):
+
+    """
+
+    Download raw text data from gutenberg with the book id's
+
+    Args:
+        text_numbers (list): List of book id's to download from Project Gutenberg.
+
+    Returns: 
+        list: List of raw text data.
+
+    """
+
+    logger.info("downloading raw data ...")
+    base_url = "https://www.gutenberg.org/cache/epub/{}/pg{}.txt"
+    raw_texts =[]
+
+    for number in text_numbers:
+        url = base_url.format(number, number)
+        logger.info("downloading from URL: %s", url)
+        response = requests.get(url)
+        response.raise_for_status() # Ensure we notice bad responses
+        raw_texts.append(response.text)
+
+    return raw_texts
 
 def clean_text(text):
     """
