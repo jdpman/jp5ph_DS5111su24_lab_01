@@ -1,0 +1,63 @@
+name: week_8
+
+on:
+  push:
+    branches:
+      - main
+      - week_8
+  pull_request:
+    branches:
+      - main
+      - week_8
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.8"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install virtualenv
+          virtualenv env
+          . env/bin/activate
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Create logs directory
+        run: mkdir -p logs
+
+      - name: Lint with pylint
+        run: |
+          . env/bin/activate
+          make lint
+
+      - name: run non-integration tests
+        #if: github.event.inputs.run_non_integration_tests == 'true'
+        run: |
+          make update
+          make test
+
+      - name: run integration tests
+        run: |
+          . env/bin/activate
+          make test-integration
+
+      - name: Display logs on failure
+        if: failure()
+        run: |
+          echo "One or more steps failed. Displaying logs for debugging:"
+          cat ./logs/pytest.log
+
+
